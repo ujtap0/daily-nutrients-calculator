@@ -1,11 +1,9 @@
 import { Collapse } from 'antd';
 import Search from '../features/Search/Search.component';
-import Modal from './ui/Modal.component';
 const { Panel } = Collapse;
 
 const List = () => {
   return (
-  <Modal>
     <Collapse defaultActiveKey={['1']}>
       <Panel header="아침" key="1">
         <Search meal='breakfast'/>
@@ -17,7 +15,6 @@ const List = () => {
         <Search meal='dinner' />
       </Panel>
     </Collapse>
-  </Modal>
 )}
 
 export default List;
