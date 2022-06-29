@@ -17,7 +17,7 @@ function* handleGetNutrient (action) {
   }
 }
 
-export function* watchNutrient() {
+export function* watchSearch() {
   const { load } = nutrientAction;
   //load 액션 함수를 인자로 넣고, handlerGetNutrient함수를 두번째 인자로 넣음
   //load 액션이 dispatch되면 saga에서 load를 take한 후 handleGetNutrient generator함수를 실행시킨다

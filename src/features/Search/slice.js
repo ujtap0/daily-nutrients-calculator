@@ -22,7 +22,7 @@ const reducers = {
   }
 }
 
-const name = 'NUTRIENT';
+const name = 'Search';
 
 const slice = createSlice({
   name, initialState, reducers
@@ -41,9 +41,9 @@ const selectAllState = createSelector(
 );
 
 export const nutrientSelector = {
-  all: state => selectAllState(state[NUTRIENT]),
+  all: state => selectAllState(state[Search]),
 }
 
-export const NUTRIENT = slice.name;
+export const Search = slice.name;
 export const nutrientReducer = slice.reducer;
 export const nutrientAction = slice.actions;

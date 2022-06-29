@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nutrientAction, nutrientSelector } from './slice'
+import { selectAction } from "../Select/slice";
 
 const Search = ({ meal }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,12 @@ const Search = ({ meal }) => {
     dispatch(load(mealDesc));
   }
 
+  const selectMealHandler = (foodData) => {
+    const { addMeal } = selectAction;
+    const selectedMeal = {meal, foodData}
+    dispatch(addMeal(selectedMeal));
+  }
+
   return(
     <div>
       <form onSubmit={submitHandler}>
@@ -22,7 +29,12 @@ const Search = ({ meal }) => {
         <button type='submit'>submit</button>
       </form>
       <ul>
-        {!isLoading&&data[meal].map((foodData, idx)=><li key={idx}>{foodData.DESC_KOR}</li>)}
+        {!isLoading&&data[meal].map((foodData, idx)=>
+        <li 
+        onClick={selectMealHandler.bind(undefined, foodData)} key={idx}
+        >
+          {foodData.DESC_KOR}
+        </li>)}
       </ul>
     </div>
   )

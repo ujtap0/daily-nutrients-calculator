@@ -1,5 +1,5 @@
 import { Collapse } from 'antd';
-import Search from '../features/Nutrient/Search.component';
+import Search from '../features/Search/Search.component';
 const { Panel } = Collapse;
 
 const List = () => {
