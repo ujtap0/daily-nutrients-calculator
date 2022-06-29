@@ -1,10 +1,13 @@
-import List from "./component/List.component";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CalendarPage from "./page/Carlendar.component";
 
 function App() {
   return (
-    <div className="App">
-      <List />
-    </div> 
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CalendarPage />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
