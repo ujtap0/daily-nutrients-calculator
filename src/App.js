@@ -1,25 +1,9 @@
-import { useRef } from 'react';
-import './App.css';
+import List from "./component/List.component";
 
 function App() {
-  const inputRed = useRef();
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    const enteredFoodName = inputRed.current.value;
-
-    fetch(`http://localhost:8080?foodName=${enteredFoodName}`)
-    .then((res)=>res.json())
-    .then(data => console.log(data))
-  }
-
   return (
     <div className="App">
-      <form onSubmit={submitHandler}>
-        <input ref={inputRed} />
-        <button type='submit'>제출하기</button>
-      </form>
+      <List />
     </div> 
   );
 }

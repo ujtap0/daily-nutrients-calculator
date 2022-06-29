@@ -2,17 +2,17 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const receipeData = require('./receipeData.js');
+const foodData = require('./foodData.js');
 
 app.use(cors());
 
 app.get('/', async(req, res)=> {
   const { foodName } = req.query;
-  await receipeData(foodName ,(error, data) => {
+  await foodData(foodName ,(error, data) => {
     if(error){
       res.send(error)
     }else{
-      console.log('서버에서:',data)
+      console.log('프록시 서버에서:',data)
       res.send(data)
     }
   })
