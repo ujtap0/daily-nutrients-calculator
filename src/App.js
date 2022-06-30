@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CalendarPage from "./page/Calendar/Carlendar.component";
-import MealForm from "./page/MealForm/MealForm.component";
+import MealDetails from "./page/MealDetails/MealDetails.component";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<CalendarPage />}/>
-        <Route path="/meal/:day" element={<MealForm />}/>
+        <Route path="/meal/:day" element={<MealDetails />}/>
       </Routes>
     </BrowserRouter>
   );

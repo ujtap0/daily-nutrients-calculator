@@ -9,6 +9,9 @@ const initialState = {
 const reducers = {
   addMeal: (state, action) => {
     state[action.payload.meal].push(action.payload.foodData)
+  },
+  removeMeal: (state, action) => {
+    state[action.payload.meal] = state[action.payload.meal].filter((food)=>food.DESC_KOR !== action.payload.name)
   }
 }
 
