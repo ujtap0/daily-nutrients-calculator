@@ -2,11 +2,7 @@ import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoading: false,
-  data : {
-    breakfast: [],
-    lunch: [],
-    dinner: [],
-  },
+  data : [],
   error: null
 }
 
@@ -14,13 +10,17 @@ const reducers = {
   load: (state, action) =>{state.isLoading = true},
   loadSuccess: (state, action) => {
     state.isLoading = false;
-    state.data[action.payload.meal] = action.payload.nutrient;
+    state.data= action.payload;
   },
   loadFail: (state, action) => {
     state.isLoading = false;
     state.error= action.payload;
-  }
-}
+  },
+  reset: (state) => {
+    state.isLoading= false;
+    state.data = [];
+    state.error = null;
+}}
 
 const name = 'Search';
 

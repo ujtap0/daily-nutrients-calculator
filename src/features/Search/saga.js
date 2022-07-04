@@ -4,13 +4,11 @@ import { nutrientAction } from './slice';
 
 function* handleGetNutrient (action) {
   const {loadSuccess , loadFail} = nutrientAction;
-  const {meal, enteredFoodName} = action.payload;
   try{
     //call: 함수 호출 첫번째 파라미터는 함수이고 나머지는 해당 함수에 들어갈 인수
-    const nutrient = yield call(getNutrientData, enteredFoodName);
+    const nutrient = yield call(getNutrientData, action.payload);
     //put: 특정 액션을 dispatch
-    const selectedMeal = {meal, nutrient}
-    yield put(loadSuccess(selectedMeal));
+    yield put(loadSuccess(nutrient));
   }catch(err){
     console.log(err)
     yield put(loadFail(err));

@@ -1,39 +1,49 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nutrientAction, nutrientSelector } from './slice'
-import { selectAction } from "../Select/slice";
+import { nutrientAction, nutrientSelector } from './slice';
 
-const Search = ({ meal }) => {
+import { Select } from "antd";
+const  {Option } = Select
+
+const Search = ({foodHandler, nextHandler}) => {
+  const [meal, setMeal] = useState('breakfast')
   const dispatch = useDispatch();
   const inputRef = useRef();
   const {isLoading, data, error} = useSelector(nutrientSelector.all);
 
-  const submitHandler = (event) => {
-    event.preventDefault();
+  const searchHandler = () => {
     const {load} = nutrientAction;
     let enteredFoodName = inputRef.current.value;
-    const mealDesc = {meal, enteredFoodName}
-    dispatch(load(mealDesc));
+    dispatch(load(enteredFoodName));
   }
 
-  const selectMealHandler = (foodData) => {
-    const { addMeal } = selectAction;
+  const seletMealHandler = (value) => {
+    setMeal(value)
+  }
+
+  const selectFoodHandler = (foodData) => {
     const selectedMeal = {meal, foodData}
-    dispatch(addMeal(selectedMeal));
+    foodHandler(selectedMeal);
+    nextHandler();
   }
 
   return(
     <div>
-      <form onSubmit={submitHandler}>
+      <div>
+        <Select defaultValue="breakfast" onChange={seletMealHandler}>
+          <Option value="breakfast">아침</Option>
+          <Option value="lunch">점심</Option>
+          <Option value="dinner">저녁</Option>
+        </Select>
         <input ref={inputRef} />
-        <button type='submit'>submit</button>
-      </form>
+        <button onClick={searchHandler}>submit</button>
+      </div>
       <ul>
-        {!isLoading&&data[meal].map((foodData, idx)=>
+        {!isLoading&&data.map((foodData, idx)=>
         <li 
-        onClick={selectMealHandler.bind(undefined, foodData)} key={idx}
+        onClick={selectFoodHandler.bind(undefined, foodData)} key={idx}
         >
-          {foodData.DESC_KOR}
+          <span>{foodData.DESC_KOR}</span>
         </li>)}
       </ul>
     </div>
