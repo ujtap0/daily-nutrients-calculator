@@ -6,26 +6,26 @@ import { StyledCalendar, CalendarContainer, Title } from './Calendar.style';
 import 'react-calendar/dist/Calendar.css';
 import dayjs from 'dayjs';
 
-const CalendarPage = (value) => {
-  const dispatch = useDispatch()
-  const [date, setDate] = useState(new Date());
+const CalendarPage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const clickHandler = () => {
-    const stringDate = date.toISOString().split('T')[0]
-    navigate(`/meal/${stringDate}`)
+  const clickHandler = (day) => {
+    const convertedate = 
+      new Date(day)
+      .toLocaleDateString()
+      .replace(/(\s*)/g, "")
+      .replace(/.$/, "")
+    navigate(`/meal/${convertedate}`)
   }
 
-  const signInHandler = async() => await dispatch(googleSignInStart())
-  
+  const signInHandler = async() => dispatch(googleSignInStart())
   return (
     <CalendarContainer>
       <button onClick={signInHandler}>로그인</button>
       <Title>DIET DIARY</Title>
       <StyledCalendar 
         formatDay ={(locale, date) => dayjs(date).format('DD')}
-        onChange = {setDate}
-        value={date}
-        onClickDay={clickHandler}
+        onClickDay={(day)=>clickHandler(day)}
       />
     </CalendarContainer>
   )

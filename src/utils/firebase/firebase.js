@@ -13,9 +13,10 @@ import {
   doc,
   getDoc,
   setDoc,
-  collection,
+  updateDoc,
   getDocs,
-  addDoc
+  collection,
+  addDoc,
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -55,7 +56,6 @@ export const getUserDescFromAuth = async(userAuth) => {
   if(!userAuth) return;
 
   const userDocRef = doc(db, 'users', userAuth.uid);
-  const collectionRef = collection(userDocRef, 'diet');
 
   const userSnapshot = await getDoc(userDocRef);
 
@@ -69,8 +69,18 @@ export const getUserDescFromAuth = async(userAuth) => {
       createdAt,
     }
     await setDoc(userDocRef, desc)
-    await addDoc(collectionRef,{test: 'test'})
   }
 
   return userSnapshot;
+}
+
+export const addDietDoc = async(intakenFoodDesk) => {
+  try{
+    const uid = auth.currentUser?.uid;
+    const userDocRef = doc(db, 'users', uid);
+    const userDietRef = collection(userDocRef, 'diet');
+    await addDoc(userDietRef, intakenFoodDesk);
+  }catch(error){
+    console.log(error)
+  }
 }
