@@ -68,9 +68,17 @@ export const getUserDescFromAuth = async(userAuth) => {
       email,
       createdAt,
     }
-    await setDoc(userDocRef, desc)
+    await setDoc(userDocRef, desc , {merge: true})
   }
 
+  return userSnapshot;
+}
+
+export const addUserInfo = async(userInfo) => {
+  const uid = auth.currentUser?.uid;
+  const userDocRef = doc(db, 'users', uid);
+  await updateDoc (userDocRef, userInfo);
+  const userSnapshot = await getDoc(userDocRef);
   return userSnapshot;
 }
 
