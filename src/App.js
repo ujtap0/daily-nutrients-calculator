@@ -6,15 +6,19 @@ import MealDetails from "./page/MealDetails/MealDetails.component";
 import NavBar from "./features/Auth/NavBar.component";
 import Main from "./page/Main/Main.component";
 import Instruction from "./page/Instruction/Instruction.component";
-import { checkUserSession, authSelector } from './features/Auth/slice'
+import { checkUserSession, authSelector } from './features/Auth/slice';
+import { selectSelector, selectAction } from "./features/Select/slice";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {isNewUser, currentUser } = useSelector(authSelector.all);
+  const { date } = useSelector(selectSelector.all);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(checkUserSession())
+    const today = new Date().toLocaleDateString();
+    if(date !== today) dispatch(selectAction.clear());
   },[]);
 
   useEffect(()=>{

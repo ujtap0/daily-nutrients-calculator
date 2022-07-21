@@ -1,6 +1,7 @@
 import { createSlice, createSelector, createAction } from "@reduxjs/toolkit";
 
 const initialState = {
+  date: '',
   breakfast : [],
   lunch : [],
   dinner : [],
@@ -9,14 +10,22 @@ const initialState = {
 
 const reducers = {
   addMeal: (state, action) => {
-    state[action.payload.meal].push(action.payload)
+    const currentDate = new Date().toLocaleDateString();
+    state.date = currentDate;
+    state[action.payload.meal].push(action.payload);
   },
   removeMeal: (state, action) => {
-    state[action.payload.meal] = state[action.payload.meal].filter((food)=>food.foodData.DESC_KOR !== action.payload.name)
+    state[action.payload.meal] = state[action.payload.meal].filter((food)=>food.foodData.DESC_KOR !== action.payload.name);
   },
   submitError: (state, action) => {
-    state.error = action.payload
-  } 
+    state.error = action.payload;
+  },
+  clear: (state) => {
+    state.date = '';
+    state.breakfast = [];
+    state.lunch = [];
+    state.dinner = [];
+  }
 }
 
 const name = 'Select';
@@ -29,8 +38,9 @@ const selectAllState = createSelector(
   state => state.breakfast,
   state => state.lunch,
   state => state.dinner,
-  (breakfast, lunch, dinner) => {
-    return {breakfast, lunch, dinner}
+  state => state.date,
+  (breakfast, lunch, dinner, date) => {
+    return {breakfast, lunch, dinner, date}
   }
 )
 

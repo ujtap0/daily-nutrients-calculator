@@ -4,7 +4,7 @@ import MealPortion from './MealPortion.component';
 
 import Modal from '../../component/ui/Modal.component';
 
-const MealForm = ({onClose}) => {
+const  MealForm = ({onClose}) => {
   const [meal, setMeal] = useState({});
   const [order, setOrder] = useState(0);
 
