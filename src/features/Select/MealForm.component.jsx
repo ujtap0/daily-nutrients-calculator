@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Search from '../Search/Search.component';
 import MealPortion from './MealPortion.component';
 

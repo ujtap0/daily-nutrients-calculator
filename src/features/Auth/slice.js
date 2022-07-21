@@ -19,6 +19,10 @@ const reducers = {
   },
   setIsNewUser: (state, action) => {
     state.isNewUser = action.payload;
+  },
+  clear: (state) => {
+    state.isNewUser = null;
+    state.currentUser= null
   }
 }
 
@@ -27,6 +31,8 @@ const name = 'Auth';
 const slice = createSlice({
   name, initialState, reducers
 });
+
+//useSelector가 실행될 때마다 정의된 함수는 매번 새로운 배열을 반환하게 되면서 이전에 참조하고 있던 객체 주소가 현재 주소와의 차이를 발생시켜서 계산 비용이 발생
 
 const authAllState = createSelector(
   state => state.isNewUser,
@@ -39,7 +45,7 @@ const authAllState = createSelector(
 );
 
 export const authSelector = {
-  all: state => authAllState(state[Auth])
+  all: state => authAllState(state[Auth]),
 };
 
 export const Auth = slice.name;
@@ -50,3 +56,4 @@ export const authActions = slice.actions;
 export const googleSignInStart = createAction('Auth/GOOGLE_SIGN_IN_START');
 export const addAdditonalUserInfo = createAction('Auth/USER_INFO_UPDATE');
 export const checkUserSession = createAction('Auth/CHECK_USER_SESSION');
+export const signOutStart = createAction('Auth/SIGN_OUT')

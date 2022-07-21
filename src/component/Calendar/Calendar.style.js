@@ -2,9 +2,7 @@ import styled from "styled-components";
 import Calendar from "react-calendar";
 
 export const CalendarContainer = styled.div`
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
+  max-width: 100%;
 `
 export const Title = styled.h2`
   font-size: 60px;
@@ -17,7 +15,7 @@ export const StyledCalendar = styled(Calendar)`
  border: 0;
  border-radius: 16px;
  padding: 40px 50px;
- box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+ box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
  button{
    padding: 30px;
    font-size: 18px;

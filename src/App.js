@@ -1,17 +1,17 @@
 import { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import MealDetails from "./page/MealDetails/MealDetails.component";
 import NavBar from "./features/Auth/NavBar.component";
 import Main from "./page/Main/Main.component";
 import Instruction from "./page/Instruction/Instruction.component";
-import { checkUserSession } from './features/Auth/slice';
-import { authSelector } from "./features/Auth/slice";
+import { checkUserSession, authSelector } from './features/Auth/slice'
 
 function App() {
   const dispatch = useDispatch();
-  const {isNewUser, currentUser, isLoading, error} = useSelector(authSelector.all);
   const navigate = useNavigate();
+  const {isNewUser, currentUser } = useSelector(authSelector.all);
 
   useEffect(()=>{
     dispatch(checkUserSession())
@@ -19,9 +19,13 @@ function App() {
 
   useEffect(()=>{
     if(isNewUser && currentUser !== null){
-      navigate('main/new-user');
-    }else if(!isNewUser && currentUser !== null){
-      navigate('main/board');
+      navigate('/main/new-user');
+    }
+    if(!isNewUser && currentUser !== null){
+      navigate('/main/board');
+    }
+    if(currentUser === null){
+      navigate('/')
     }
   },[currentUser, isNewUser, navigate])
 

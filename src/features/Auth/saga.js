@@ -1,6 +1,6 @@
 import {takeLatest, put, call, all} from 'redux-saga/effects';
-import { googleSignInStart, authActions, checkUserSession, addAdditonalUserInfo } from './slice';
-import { getCurrentUser, getUserDescFromAuth, signInWithGooglePopup, addUserInfo } from '../../utils/firebase/firebase';
+import { googleSignInStart, authActions, checkUserSession, addAdditonalUserInfo, signOutStart } from './slice';
+import { getCurrentUser, getUserDescFromAuth, signInWithGooglePopup, addUserInfo, signOutUser } from '../../utils/firebase/firebase';
 import { getAdditionalUserInfo } from 'firebase/auth';
 
 export function* getSnapshotFromUserAuth (userAuth) {
@@ -49,6 +49,16 @@ export function* isUserAuthenticated(){
   }
 }
 
+export function* signOut() {
+  const {clear} = authActions;
+  try{
+    yield call(signOutUser);
+    yield put(clear());
+  }catch(error){
+    console.log(error);
+  }
+}
+
 export function* onSignInStart() {
   yield takeLatest(googleSignInStart.type, signInWithGoogle);
 }
@@ -61,10 +71,15 @@ export function* onAddAddtionalInfo(){
   yield takeLatest(addAdditonalUserInfo.type, updateUserInfo)
 }
 
+export function* onSignOutStart() {
+  yield takeLatest(signOutStart.type, signOut)
+}
+
 export function* watchAuth() {
   yield all([
     call(onCheckUserSession),
     call(onSignInStart),
     call(onAddAddtionalInfo),
+    call(onSignOutStart)
   ])
 }

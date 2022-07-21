@@ -9,6 +9,8 @@ import {
 }from 'firebase/auth';
 
 import {
+  query,
+  where,
   getFirestore,
   doc,
   getDoc,
@@ -82,13 +84,26 @@ export const addUserInfo = async(userInfo) => {
   return userSnapshot;
 }
 
-export const addDietDoc = async(intakenFoodDesk) => {
+export const addFoodToDocument = async(intakenFoodDesk) => {
   try{
     const uid = auth.currentUser?.uid;
     const userDocRef = doc(db, 'users', uid);
+    const date = new Date().toDateString();
     const userDietRef = collection(userDocRef, 'diet');
-    await addDoc(userDietRef, intakenFoodDesk);
+    const q = query(userDietRef, where("date", "==", date))
+    const querySnapshot = await getDocs(q);
+    const data = querySnapshot.docs
+    console.log(data);
+    if(data.length === 0){
+      await addDoc(userDietRef, intakenFoodDesk);
+    }else{
+      const docId = data[0].id;
+      const dietDocRef = doc(userDietRef, docId);
+      await setDoc( dietDocRef, intakenFoodDesk, {merge: true});
+    }
   }catch(error){
     console.log(error)
   }
 }
+
+export const signOutUser = async () => await signOut(auth);

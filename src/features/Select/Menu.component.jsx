@@ -1,12 +1,15 @@
 import MenuTag from "./MenuTag.component";
+import { Container, Wrapper } from "./Menu.style";
 
 const Menu = ({meal, content}) => {
  return(
-  <div>
+  <Container>
     <h3>{meal}</h3>
-    {content.length>0 && 
-      content.map(food => <MenuTag meal={meal} name={food.foodData.DESC_KOR}/>)}
-  </div>
+    <Wrapper>
+      {content.length>0 && 
+        content.map(food => <MenuTag meal={meal} name={food.foodData.DESC_KOR}/>)}
+    </Wrapper>
+  </Container>
  )
 }
 export default Menu;

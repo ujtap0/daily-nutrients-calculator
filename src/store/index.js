@@ -5,6 +5,18 @@ import {selectReducer, Select} from '../features/Select/slice';
 import { authReducer, Auth } from "../features/Auth/slice";
 import { rootSaga } from "./root-saga";
 
+import { persistStore, persistReducer } from "redux-persist";
+//locastorage에 저장
+import storage from "redux-persist/lib/storage";
+//세션에 저장
+//import storageSession from 'redux-persist/lib/storage/session
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['Select']
+}
+
 export const rootReducer = combineReducers({
   [Search]: nutrientReducer,
   [Select]: selectReducer,
@@ -13,15 +25,14 @@ export const rootReducer = combineReducers({
 
 const sagaMiddleware = createSagaMiddleware();
 
-const createStore = () => {
-  const store = configureStore({
-    reducer: rootReducer,
-    devTools: true,
-    middleware: [sagaMiddleware]
-  })
-  sagaMiddleware.run(rootSaga);
-  return store;
-}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
+export const store = configureStore({
+  reducer: persistedReducer,
+  devTools: true,
+  middleware: [sagaMiddleware]
+})
 
-export default createStore;
+sagaMiddleware.run(rootSaga);
+
+export const persistor = persistStore(store);
