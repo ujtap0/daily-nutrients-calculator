@@ -11,6 +11,7 @@ export const Container = styled.div`
   padding: 6rem;
   border-radius: 6px;
   margin-bottom: 6rem;
+  background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `
 

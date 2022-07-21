@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { selectAction } from "./slice";
-import { Tag } from "antd";
+import { StyledTag } from "./MenuTag.style";
 
 const MenuTag = ({meal, name}) => {
   const dispatch = useDispatch();
@@ -8,8 +8,8 @@ const MenuTag = ({meal, name}) => {
   const mealContent = {meal, name}
   const removeHandler = () => dispatch(removeMeal(mealContent))
   return(
-    <Tag 
-      closable onClose={removeHandler}>{name}</Tag>
+    <StyledTag 
+      closable onClose={removeHandler}>{name}</StyledTag>
   )
 }
 export default MenuTag;

@@ -12,3 +12,11 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   width: 100%
 `
+
+export const BtnWrapper = styled.div`
+  margin-top: 4rem;
+  text-align: right;
+  button:first-child{
+    margin-right: 5px;
+  }
+`

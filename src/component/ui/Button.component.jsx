@@ -1,4 +1,4 @@
-import { FilledBtn } from "./Button.style";
+import { FilledBtn, InvertedBtn } from "./Button.style";
 
 export const BUTTON_TYPE_CLASSES = {
   filled: 'filed',
@@ -7,6 +7,7 @@ export const BUTTON_TYPE_CLASSES = {
 const getButton = (buttonType = BUTTON_TYPE_CLASSES.filled) =>
 ({
   [BUTTON_TYPE_CLASSES.filled]: FilledBtn,
+  [BUTTON_TYPE_CLASSES.inverted]: InvertedBtn,
 }[buttonType]);
 
 const Button = ({children, buttonType, ...otherProps}) => {

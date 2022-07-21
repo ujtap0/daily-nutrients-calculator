@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectSelector } from "./slice";
 import MealForm from "./MealForm.component";
 import Menu from "./Menu.component";
-import { Container, Wrapper } from "./Meal.style";
+import { Container, Wrapper, BtnWrapper } from "./Meal.style";
 import { submitIntakedFoodsDesk } from "./slice";
+import Button from "../../component/ui/Button.component";
+import { BUTTON_TYPE_CLASSES } from "../../component/ui/Button.component";
 
 const Meal = () => {
   const dispatch = useDispatch();
@@ -30,14 +32,16 @@ const Meal = () => {
       <Container>
         <div>
           <span>{`${currentYear} / ${currentMonth + 1} / ${currentDate}`}</span>
-        <button onClick={showModalHandler}>입력하기</button>
         </div>
         <Wrapper>
           <Menu meal='breakfast' content={breakfast}/>
           <Menu meal='lunch' content={lunch}/>
           <Menu meal='dinner' content={dinner}/>
         </Wrapper>
-        <button onClick={submitHandler}>저장하기</button>
+        <BtnWrapper>
+          <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={showModalHandler}>입력하기</Button>
+          <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={submitHandler}>저장하기</Button>
+        </BtnWrapper>
       </Container>
     </Fragment>
   )

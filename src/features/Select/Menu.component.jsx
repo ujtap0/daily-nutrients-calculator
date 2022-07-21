@@ -1,13 +1,15 @@
 import MenuTag from "./MenuTag.component";
-import { Container, Wrapper } from "./Menu.style";
+import { Container, Wrapper, StyledTitle } from "./Menu.style";
 
 const Menu = ({meal, content}) => {
  return(
   <Container>
-    <h3>{meal}</h3>
+    <StyledTitle>{meal}</StyledTitle>
     <Wrapper>
       {content.length>0 && 
-        content.map(food => <MenuTag meal={meal} name={food.foodData.DESC_KOR}/>)}
+        content.map(food => <div>
+          <MenuTag meal={meal} name={food.foodData.DESC_KOR}/>
+        </div>)}
     </Wrapper>
   </Container>
  )
