@@ -1,7 +1,6 @@
 import { createSlice, createSelector, createAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  date: '',
   breakfast : [],
   lunch : [],
   dinner : [],
@@ -10,8 +9,6 @@ const initialState = {
 
 const reducers = {
   addMeal: (state, action) => {
-    const currentDate = new Date().toLocaleDateString();
-    state.date = currentDate;
     state[action.payload.meal].push(action.payload);
   },
   removeMeal: (state, action) => {

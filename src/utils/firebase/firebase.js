@@ -19,6 +19,7 @@ import {
   getDocs,
   collection,
   addDoc,
+  serverTimestamp
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -88,18 +89,20 @@ export const addFoodToDocument = async(intakenFoodDesk) => {
   try{
     const uid = auth.currentUser?.uid;
     const userDocRef = doc(db, 'users', uid);
-    const date = new Date().toDateString();
+    const today = `${new Date().getFullYear()}, ${new Date().getMonth() + 1}, ${new Date().getDate()}`;
+    const createdAt = new Date(today);
     const userDietRef = collection(userDocRef, 'diet');
-    const q = query(userDietRef, where("date", "==", date))
+    const q = query(userDietRef, where("createdAt", "==", createdAt))
     const querySnapshot = await getDocs(q);
-    const data = querySnapshot.docs
+    const data = querySnapshot.docs;
+    const foodData = { intakenFoodDesk, createdAt }
     console.log(data);
     if(data.length === 0){
-      await addDoc(userDietRef, intakenFoodDesk);
+      await addDoc(userDietRef, foodData);
     }else{
       const docId = data[0].id;
       const dietDocRef = doc(userDietRef, docId);
-      await setDoc( dietDocRef, intakenFoodDesk, {merge: true});
+      await setDoc( dietDocRef, foodData, {merge: true});
     }
   }catch(error){
     console.log(error)
@@ -107,3 +110,16 @@ export const addFoodToDocument = async(intakenFoodDesk) => {
 }
 
 export const signOutUser = async () => await signOut(auth);
+
+export const getDietPerMonth = async(year, month) => {
+  try{
+    const uid = auth.currentUser?.uid;
+    const userDocRef = doc(db, 'users', uid);
+    const userDietRef = collection(userDocRef, 'diet');
+    const q = query(userDietRef, where("createdAt", ">=", new Date(year, month, 1)), where("createdAt", "<=", new Date(year, month + 1, 0)))
+    const querySnapshot = await getDocs(q)
+    return querySnapshot.docs
+  }catch(error){
+    console.log(error)
+  }
+}

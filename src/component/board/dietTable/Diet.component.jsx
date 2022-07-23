@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectSelector } from "../../../features/Select/slice";
 import DietForm from "../dietForm/DietForm.component";
 import Menu from "./Menu.component";
-import { Container, Wrapper, BtnWrapper } from "./Diet.style";
+import { Container, Wrapper, BtnWrapper, AlarmText } from "./Diet.style";
 import { submitIntakedFoodsDesk } from "../../../features/Select/slice";
 import Button from "../../ui/Button.component";
 import { BUTTON_TYPE_CLASSES } from "../../ui/Button.component";
@@ -34,9 +34,15 @@ const Diet = () => {
           <span>{`${currentYear} / ${currentMonth + 1} / ${currentDate}`}</span>
         </div>
         <Wrapper>
-          <Menu meal='breakfast' content={breakfast}/>
-          <Menu meal='lunch' content={lunch}/>
-          <Menu meal='dinner' content={dinner}/>
+          {!breakfast.length && !lunch.length && !dinner.length ? 
+            <AlarmText>아직 입력된 식단이 없습니다!</AlarmText> :
+            <>
+              <Menu meal='breakfast' content={breakfast}/>
+              <Menu meal='lunch' content={lunch}/>
+              <Menu meal='dinner' content={dinner}/>
+            </>
+          }
+          
         </Wrapper>
         <BtnWrapper>
           <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={showModalHandler}>입력하기</Button>

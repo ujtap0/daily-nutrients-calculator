@@ -10,13 +10,18 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%
+  width: 100%;
 `
-
+  
 export const BtnWrapper = styled.div`
   margin-top: 4rem;
   text-align: right;
   button:first-child{
     margin-right: 5px;
   }
+`
+  
+export const AlarmText = styled.p`
+  margin: 4rem auto 0;
+  font-size: 2rem;
 `
