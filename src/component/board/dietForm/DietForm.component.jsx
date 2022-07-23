@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import Search from '../Search/Search.component';
+import FoodDescSearch from './FoodDescSearch.component'
 import MealPortion from './MealPortion.component';
 
-import Modal from '../../component/ui/Modal.component';
+import Modal from '../../ui/Modal.component';
 
-const  MealForm = ({onClose}) => {
+const  DietForm = ({onClose}) => {
   const [meal, setMeal] = useState({});
   const [order, setOrder] = useState(0);
 
@@ -17,7 +17,7 @@ const  MealForm = ({onClose}) => {
   let currentPage;
 
   if(order === 0){
-    currentPage = <Search foodHandler={foodHandler} nextHandler={nextHandler} />
+    currentPage = <FoodDescSearch foodHandler={foodHandler} nextHandler={nextHandler} />
   }else if(order === 1){
     currentPage = <MealPortion food={meal} onClose={onClose} />
   }
@@ -32,4 +32,4 @@ const  MealForm = ({onClose}) => {
     </Modal>
 )}
 
-export default MealForm;
+export default DietForm;

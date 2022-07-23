@@ -1,14 +1,14 @@
 import { useState, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSelector } from "./slice";
-import MealForm from "./MealForm.component";
+import { selectSelector } from "../../../features/Select/slice";
+import DietForm from "../dietForm/DietForm.component";
 import Menu from "./Menu.component";
-import { Container, Wrapper, BtnWrapper } from "./Meal.style";
-import { submitIntakedFoodsDesk } from "./slice";
-import Button from "../../component/ui/Button.component";
-import { BUTTON_TYPE_CLASSES } from "../../component/ui/Button.component";
+import { Container, Wrapper, BtnWrapper } from "./Diet.style";
+import { submitIntakedFoodsDesk } from "../../../features/Select/slice";
+import Button from "../../ui/Button.component";
+import { BUTTON_TYPE_CLASSES } from "../../ui/Button.component";
 
-const Meal = () => {
+const Diet = () => {
   const dispatch = useDispatch();
   const [isModalShow, setIsModalShow] = useState(false);
 
@@ -28,7 +28,7 @@ const Meal = () => {
 
   return(
     <Fragment>
-      {isModalShow && <MealForm onClose={hideModalHandler}/>}
+      {isModalShow && <DietForm onClose={hideModalHandler}/>}
       <Container>
         <div>
           <span>{`${currentYear} / ${currentMonth + 1} / ${currentDate}`}</span>
@@ -47,4 +47,4 @@ const Meal = () => {
   )
 
 }
-export default Meal;
+export default Diet;

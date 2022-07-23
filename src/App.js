@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import MealDetails from "./page/MealDetails/MealDetails.component";
-import NavBar from "./features/Auth/NavBar.component";
+import NavBar from "./component/layout/NavBar.component";
 import Main from "./page/Main/Main.component";
-import Instruction from "./page/Instruction/Instruction.component";
+import Intro from "./page/Intro/Intro.component";
 import { checkUserSession, authSelector } from './features/Auth/slice';
 import { selectSelector, selectAction } from "./features/Select/slice";
 
@@ -36,7 +36,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<NavBar />}>
-        <Route index element={<Instruction />}/>
+        <Route index element={<Intro />}/>
         <Route path="main/*" element={<Main />} />
         <Route path="meal/:day" element={<MealDetails />}/>
       </Route>

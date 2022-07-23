@@ -1,6 +1,6 @@
-import { Background, StyledTitle, Wrapper, StyledContent, TextWrapper } from "./instruction.style";
+import { Background, StyledTitle, Wrapper, StyledContent, TextWrapper } from "./Intro.style";
 
-const Instruction = () => {
+const Intro = () => {
   return(
     <Wrapper>
       <Background />
@@ -12,4 +12,4 @@ const Instruction = () => {
   )
 };
 
-export default Instruction;
+export default Intro;

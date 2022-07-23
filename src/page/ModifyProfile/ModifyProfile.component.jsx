@@ -2,10 +2,10 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addAdditonalUserInfo } from "../../features/Auth/slice";
-import { FormContainer, StyledInput, FieldContainer, StyledLabel, InputContainer, StyledSelect, StyledTitle, StyledBtnContainer } from "./Profile.style";
+import { FormContainer, StyledInput, FieldContainer, StyledLabel, InputContainer, StyledSelect, StyledTitle, StyledBtnContainer } from "./ModifyProfile.style";
 import Button from "../../component/ui/Button.component";
 
-const Profile = () => {
+const ModifyProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const year = new Date().getFullYear();
@@ -74,4 +74,4 @@ const Profile = () => {
     </FormContainer>
   )
 }
-export default Profile;
+export default ModifyProfile;

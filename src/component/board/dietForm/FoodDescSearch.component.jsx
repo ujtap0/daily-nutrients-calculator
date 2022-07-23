@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { nutrientAction, nutrientSelector } from './slice';
+import { nutrientAction, nutrientSelector } from '../../../features/Search/slice';
 
 import { Select } from "antd";
 const  {Option } = Select
 
-const Search = ({foodHandler, nextHandler}) => {
+const FoodDescSearch = ({foodHandler, nextHandler}) => {
   const [meal, setMeal] = useState('breakfast')
   const dispatch = useDispatch();
   const inputRef = useRef();
@@ -50,4 +50,4 @@ const Search = ({foodHandler, nextHandler}) => {
   )
 }
 
-export default Search;
+export default FoodDescSearch;

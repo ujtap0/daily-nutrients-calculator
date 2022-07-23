@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { selectAction } from "./slice";
-import { nutrientAction } from "../Search/slice";
+import { selectAction } from "../../../features/Select/slice";
+import { nutrientAction } from "../../../features/Search/slice";
 import { InputNumber } from "antd";
 
 const MealPortion = ({ food, onClose }) => {

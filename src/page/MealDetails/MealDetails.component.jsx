@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectSelector } from "../../features/Select/slice";
 import { submitIntakedFoodsDesk } from "../../features/Select/slice";
-import Meal from "../../features/Select/Meal.component";
+import Diet from "../../component/board/dietTable/Diet.component";
 
 const MealDetails = () => {
   const { day } = useParams();
@@ -15,7 +15,7 @@ const MealDetails = () => {
   const submitHandler = () => dispatch(submitIntakedFoodsDesk(submitData))
   return(
     <Fragment>
-      <Meal />
+      <Diet />
       <button onClick={submitHandler}>제출하기</button>
     </Fragment>
   )

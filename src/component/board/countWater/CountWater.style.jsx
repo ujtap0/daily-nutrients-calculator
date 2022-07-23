@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ReactComponent as FilledWater } from '../../assets/icon/local_drink_FILL1.svg';
-import { ReactComponent as EmptyWater } from '../../assets/icon/local_drink_FILL0.svg';
+import { ReactComponent as FilledWater } from '../../../assets/icon/local_drink_FILL1.svg';
+import { ReactComponent as EmptyWater } from '../../../assets/icon/local_drink_FILL0.svg';
 
 export const Title = styled.h3`
   font-size: 1.6rem;

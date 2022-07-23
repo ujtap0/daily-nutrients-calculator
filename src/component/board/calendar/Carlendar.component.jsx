@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { StyledCalendar, CalendarContainer, Title } from './Calendar.style';
+import { StyledCalendar, CalendarContainer } from './Calendar.style';
 import 'react-calendar/dist/Calendar.css';
 import dayjs from 'dayjs';
 
-const CalendarPage = () => {
+const Calendar = () => {
   const navigate = useNavigate();
   const clickHandler = (day) => {
     const convertedate = 
@@ -24,4 +24,4 @@ const CalendarPage = () => {
     </CalendarContainer>
   )
 }
-export default CalendarPage
+export default Calendar

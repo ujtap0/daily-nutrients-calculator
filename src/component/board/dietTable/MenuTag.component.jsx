@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { selectAction } from "./slice";
+import { selectAction } from "../../../features/Select/slice";
 import { StyledTag } from "./MenuTag.style";
 
 const MenuTag = ({meal, name}) => {

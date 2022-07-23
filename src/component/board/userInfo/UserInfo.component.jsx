@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { authSelector } from "../../features/Auth/slice";
+import { authSelector } from "../../../features/Auth/slice";
 import { Container, Greating, Figure } from './UserInfo.style'
 
 const UserInfo = () => {

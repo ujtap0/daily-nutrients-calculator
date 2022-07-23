@@ -1,6 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import Board from '../Board/Board.component'
-import Profile from '../Profile/Profil.component';
+import Profile from '../ModifyProfile/ModifyProfile.component';
 
 const Main = () => {
   return(

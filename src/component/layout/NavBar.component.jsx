@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
-import { authSelector, googleSignInStart, signOutStart } from "./slice";
+import { authSelector, googleSignInStart, signOutStart } from "../../features/Auth/slice";
 import { NavBarWrapper, NavBarContainer, LogoContainer, StyledButton } from "./NavBar.style";
 
 const NavBar = () => {
