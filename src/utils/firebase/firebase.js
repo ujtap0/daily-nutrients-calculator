@@ -1,3 +1,4 @@
+import { queries } from "@testing-library/react";
 import { initializeApp } from "firebase/app";
 
 import {
@@ -116,9 +117,11 @@ export const getDietPerMonth = async(year, month) => {
     const uid = auth.currentUser?.uid;
     const userDocRef = doc(db, 'users', uid);
     const userDietRef = collection(userDocRef, 'diet');
-    const q = query(userDietRef, where("createdAt", ">=", new Date(year, month, 1)), where("createdAt", "<=", new Date(year, month + 1, 0)))
-    const querySnapshot = await getDocs(q)
-    return querySnapshot.docs
+    const firstDay = new Date(year, month);
+    const lastDay = new Date(year, month + 1, 0);
+    const q = query(userDietRef, where("createdAt", ">=", firstDay), where("createdAt", "<=", lastDay) )
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map(doc => ({...doc.data()}))
   }catch(error){
     console.log(error)
   }
