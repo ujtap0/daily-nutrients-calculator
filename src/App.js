@@ -25,9 +25,6 @@ function App() {
     if(isNewUser && currentUser !== null){
       navigate('/main/new-user');
     }
-    if(!isNewUser && currentUser !== null){
-      navigate('/main/board');
-    }
     if(currentUser === null){
       navigate('/')
     }

@@ -1,6 +1,17 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { authSelector } from "../../features/Auth/slice";
 import { Background, StyledTitle, Wrapper, StyledContent, TextWrapper } from "./Intro.style";
 
 const Intro = () => {
+  const navigate = useNavigate();
+  const {isNewUser, currentUser } = useSelector(authSelector.all);
+  useEffect(()=>{
+    if(!isNewUser && currentUser !== null){
+      navigate('/main/board');
+    }
+  },[currentUser, isNewUser, navigate])
   return(
     <Wrapper>
       <Background />
