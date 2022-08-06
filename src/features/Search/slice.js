@@ -17,7 +17,7 @@ const reducers = {
     state.error= action.payload;
   },
   reset: (state) => {
-    state.isLoading= false;
+    state.isLoading = false;
     state.data = [];
     state.error = null;
 }}

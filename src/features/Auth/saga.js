@@ -5,11 +5,8 @@ import { getAdditionalUserInfo } from 'firebase/auth';
 
 export function* getSnapshotFromUserAuth (userAuth) {
   const { loadSuccess, loadFail } = authActions;
-  const year = new Date().getFullYear();
-  const month = new Date().getMonth();
   try{
     const userSnapshot = yield call(getUserDescFromAuth, userAuth);
-    const userDietPerMonthSnapshot = yield call(getDietPerMonth, year, month);
     yield put(loadSuccess({...userSnapshot.data()}));
   }catch(error){
     yield put(loadFail(error));

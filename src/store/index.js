@@ -3,6 +3,7 @@ import createSagaMiddleware from "@redux-saga/core";
 import { Search, nutrientReducer } from "../features/Search/slice";
 import {selectReducer, Select} from '../features/Select/slice';
 import { authReducer, Auth } from "../features/Auth/slice";
+import { dietReducer, Diet } from "../features/Diet/slice";
 import { rootSaga } from "./root-saga";
 
 import { persistStore, persistReducer } from "redux-persist";
@@ -20,7 +21,8 @@ const persistConfig = {
 export const rootReducer = combineReducers({
   [Search]: nutrientReducer,
   [Select]: selectReducer,
-  [Auth]: authReducer
+  [Auth]: authReducer,
+  [Diet]: dietReducer
 })
 
 const sagaMiddleware = createSagaMiddleware();

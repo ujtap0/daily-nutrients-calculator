@@ -1,20 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { dietAction } from '../../../features/Diet/slice';
 import { useNavigate } from 'react-router-dom';
 import { StyledCalendar, CalendarContainer } from './Calendar.style';
 import 'react-calendar/dist/Calendar.css';
 import dayjs from 'dayjs';
-import { getDietPerMonth } from '../../../utils/firebase/firebase';
-
-const dietHandler = async(year, month) => {
-    const data = await getDietPerMonth(year, month);
-    console.log(year, month, data);
-    return data
-}
 
 const Calendar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
-  const navigate = useNavigate();
   const clickHandler = (day) => {
     const convertedate = 
       new Date(day)
@@ -31,9 +27,10 @@ const Calendar = () => {
   }
 
   useEffect(()=>{
-    const getDietCurrentMonth = async() => await dietHandler(year, month);
-    getDietCurrentMonth()
-  },[month, year]);
+    const { load } = dietAction
+    const monthYear = {month, year}
+    dispatch(load(monthYear))
+  },[dispatch, month, year]);
 
   return (
     <CalendarContainer>

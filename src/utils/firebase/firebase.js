@@ -1,4 +1,3 @@
-import { queries } from "@testing-library/react";
 import { initializeApp } from "firebase/app";
 
 import {
@@ -20,7 +19,6 @@ import {
   getDocs,
   collection,
   addDoc,
-  serverTimestamp
 } from 'firebase/firestore'
 
 const firebaseConfig = {
