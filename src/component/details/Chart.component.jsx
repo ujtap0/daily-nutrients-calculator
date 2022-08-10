@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getDietByDate } from '../../features/Diet/slice';
+import { calculator } from '../../utils/calNutrient.js'
 
 const Chart = () => {
   const { day } = useParams();
@@ -13,7 +14,7 @@ const Chart = () => {
   ]
 
   useEffect(()=>{
-    console.log(mealForADay)
+    console.log(calculator(mealForADay))
   },[])
 
   return(
