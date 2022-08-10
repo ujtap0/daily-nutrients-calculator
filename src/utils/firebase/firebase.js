@@ -22,12 +22,12 @@ import {
 } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCXJw3M7YVg1sTx6Of7gd_s2_BXEK238nM",
-  authDomain: "daily-nutrients-calculator.firebaseapp.com",
-  projectId: "daily-nutrients-calculator",
-  storageBucket: "daily-nutrients-calculator.appspot.com",
-  messagingSenderId: "1020445042220",
-  appId: "1:1020445042220:web:a92c49c193ccc76afc9389"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);

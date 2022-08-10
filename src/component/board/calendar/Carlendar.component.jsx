@@ -12,11 +12,7 @@ const Calendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const clickHandler = (day) => {
-    const convertedate = 
-      new Date(day)
-      .toLocaleDateString()
-      .replace(/(\s*)/g, "")
-      .replace(/.$/, "")
+    const convertedate = new Date(day).getTime();
     navigate(`/meal/${convertedate}`)
   }
 
