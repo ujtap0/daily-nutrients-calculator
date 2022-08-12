@@ -12,8 +12,11 @@ const MealPortion = ({ food, onClose }) => {
     event.preventDefault();
     const { addMeal } = selectAction;
     const { reset } = nutrientAction;
-    const portion = portionRef.current.value;
-    const mealDesk = {...food, portion}
+    const amount = portionRef.current.value;
+    const mealDesk = {
+      ...food, 
+      portion: amount/food.foodData['SERVING_WT']
+    }
     dispatch(addMeal(mealDesk));
     dispatch(reset());
     onClose();
@@ -22,7 +25,11 @@ const MealPortion = ({ food, onClose }) => {
   return(
     <form onSubmit={submitHandler}>
       <h3>얼마나 드셨나요?</h3>
-      <InputNumber min={100} defaultValue={100} step={100} ref={portionRef}/>
+      <InputNumber 
+        min={+food.foodData['SERVING_WT']} 
+        defaultValue={+food.foodData['SERVING_WT']} 
+        step={+food.foodData['SERVING_WT']} 
+        ref={portionRef}/>
       <button>제출하기</button>
     </form>
   )
