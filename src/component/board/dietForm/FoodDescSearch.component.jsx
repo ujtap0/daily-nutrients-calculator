@@ -6,16 +6,31 @@ import { Select } from "antd";
 const  {Option } = Select
 
 const FoodDescSearch = ({foodHandler, nextHandler}) => {
+  const {isLoading, data, error, totalPage, searchTerm} = useSelector(nutrientSelector.all);
   const [meal, setMeal] = useState('breakfast')
   const dispatch = useDispatch();
   const inputRef = useRef();
-  const {isLoading, data, error} = useSelector(nutrientSelector.all);
+
+  console.log(data);
 
   const searchHandler = () => {
-    const {load} = nutrientAction;
+    const { load } = nutrientAction;
     const enteredFoodName = inputRef.current.value;
     const removedSpaceString = enteredFoodName.split(' ').join('');
-    dispatch(load(removedSpaceString));
+    const request = {
+      searchTerm : removedSpaceString,
+      pageNum: 1
+    }
+    dispatch(load(request));
+  }
+
+  const pageNavigateHandler = (pageNum) => {
+    const { load } = nutrientAction;
+    const request = {
+      searchTerm : searchTerm,
+      pageNum: pageNum
+    };
+    dispatch(load(request));
   }
 
   const seletMealHandler = (value) => {
@@ -40,7 +55,6 @@ const FoodDescSearch = ({foodHandler, nextHandler}) => {
         <span>{foodData.DESC_KOR}</span>
       </li>)
   }
-
   return(
     <div>
       <div>
@@ -54,6 +68,10 @@ const FoodDescSearch = ({foodHandler, nextHandler}) => {
       </div>
       <ul>
         {!isLoading&&resultList}
+      </ul>
+      <ul>
+          {!isLoading&&Array.from({length: totalPage}, (v, i) => i + 1)
+            .map((pageNum)=><button onClick={(e) => {pageNavigateHandler(pageNum, e)}}>{pageNum}</button>)}
       </ul>
     </div>
   )

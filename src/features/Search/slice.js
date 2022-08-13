@@ -1,16 +1,24 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
+  searchTerm: '',
   isLoading: false,
+  currentPage: 0,
+  totalPage: 0,
   data : [],
   error: null
 }
 
 const reducers = {
-  load: (state, action) =>{state.isLoading = true},
+  load: (state, action) =>{
+    state.searchTerm = action.payload.searchTerm;
+    state.isLoading = true;
+  },
   loadSuccess: (state, action) => {
     state.isLoading = false;
-    state.data= action.payload;
+    state.data= action.payload.items;
+    state.totalPage = Math.ceil(action.payload.totalCount / action.payload.numOfRows);
+    state.currentPage = action.payload.pageNo
   },
   loadFail: (state, action) => {
     state.isLoading = false;
@@ -19,6 +27,8 @@ const reducers = {
   reset: (state) => {
     state.isLoading = false;
     state.data = [];
+    state.currentPage = 0;
+    state.totalPage = 0;
     state.error = null;
 }}
 
@@ -33,10 +43,12 @@ const slice = createSlice({
 
 const selectAllState = createSelector(
   state => state.isLoading,
+  state => state.searchTerm,
   state => state.data,
   state => state.error,
-  (isLoading, data, error) => {
-    return {isLoading, data, error}
+  state => state.totalPage,
+  (isLoading, searchTerm, data, error, totalPage) => {
+    return {isLoading, searchTerm, data, error, totalPage}
   }
 );
 

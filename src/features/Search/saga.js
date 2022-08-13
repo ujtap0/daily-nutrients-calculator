@@ -6,9 +6,9 @@ function* handleGetNutrient (action) {
   const {loadSuccess , loadFail} = nutrientAction;
   try{
     //call: 함수 호출 첫번째 파라미터는 함수이고 나머지는 해당 함수에 들어갈 인수
-    const nutrient = yield call(getNutrientData, action.payload);
+    const result = yield call(getNutrientData, action.payload.searchTerm, action.payload.pageNum);
     //put: 특정 액션을 dispatch
-    yield put(loadSuccess(nutrient));
+    yield put(loadSuccess(result));
   }catch(err){
     console.log(err)
     yield put(loadFail(err));

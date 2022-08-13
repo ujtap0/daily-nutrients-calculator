@@ -7,12 +7,11 @@ const foodData = require('./foodData.js');
 app.use(cors());
 
 app.get('/', async(req, res)=> {
-  const { foodName } = req.query;
-  await foodData(foodName ,(error, data) => {
+  const { foodName, pageNum } = req.query;
+  await foodData(foodName, pageNum, (error, data) => {
     if(error){
       res.send(error)
     }else{
-      console.log('프록시 서버에서:',data)
       res.send(data)
     }
   })
