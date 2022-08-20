@@ -124,3 +124,18 @@ export const getDietPerMonth = async(year, month) => {
     console.log(error)
   }
 }
+
+export const getDietByDate = async(day) => {
+  try{
+    const uid = auth.currentUser?.uid;
+    const userDocRef = doc(db, 'users', uid);
+    const userDietRef = collection(userDocRef, 'diet');
+    const date = new Date(+day);
+    const q = query(userDietRef, where("createdAt", "==",
+    date))
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot)
+  }catch(error){
+    console.log(error)
+  }
+}

@@ -11,8 +11,6 @@ const FoodDescSearch = ({foodHandler, nextHandler}) => {
   const dispatch = useDispatch();
   const inputRef = useRef();
 
-  console.log(data);
-
   const searchHandler = () => {
     const { load } = nutrientAction;
     const enteredFoodName = inputRef.current.value;
