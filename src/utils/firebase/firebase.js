@@ -134,7 +134,7 @@ export const getDietByDate = async(day) => {
     const q = query(userDietRef, where("createdAt", "==",
     date))
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot)
+    return querySnapshot.docs[0].data();
   }catch(error){
     console.log(error)
   }

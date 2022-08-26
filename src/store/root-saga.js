@@ -2,7 +2,7 @@ import {all, call} from 'redux-saga/effects';
 import { watchSearch } from '../features/Search/saga';
 import { watchAuth } from '../features/Auth/saga';
 import { watchFood } from '../features/Select/saga';
-import { watchDiet } from '../features/Diet/saga';
+import { watchDiet, watchDietByDate } from '../features/Diet/saga';
 
 //yield call(watchSearch)
 //yield call(watchAuth)
@@ -15,6 +15,7 @@ export function * rootSaga() {
     call(watchSearch),
     call(watchAuth),
     call(watchFood),
-    call(watchDiet)
+    call(watchDiet),
+    call(watchDietByDate),
   ])
 }

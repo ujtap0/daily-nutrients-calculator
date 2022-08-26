@@ -23,9 +23,9 @@ const Calendar = () => {
   }
 
   useEffect(()=>{
-    const { load } = dietAction
+    const { loadByMonth } = dietAction
     const monthYear = {month, year}
-    dispatch(load(monthYear))
+    dispatch(loadByMonth(monthYear))
   },[dispatch, month, year]);
 
   return (

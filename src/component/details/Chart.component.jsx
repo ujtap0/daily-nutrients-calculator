@@ -1,22 +1,21 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getDietByDate } from '../../features/Diet/slice';
-import { calculator } from '../../utils/calNutrient.js';
 import ReactApexChart from 'react-apexcharts';
+import { dietSelector } from '../../features/Diet/slice';
+import { calculator } from '../../utils/calNutrient';
 
 const Chart = () => {
-  const { day } = useParams();
-  const data = useSelector((state) => getDietByDate(state, day))
-  const mealForADay = [
-    ...data.breakfast,
-    ...data.lunch,
-    ...data.dinner,
-  ]
-  const [totalNutrient, setTotalNutrient] = useState(calculator(mealForADay))
-
+  const dailyTotalDiet = useSelector(dietSelector.dailyNutrient);
+  const caculatedDailyNutrient = calculator(dailyTotalDiet);
   const donutOptions = {
-    series: [totalNutrient.calbonate, totalNutrient.protein, totalNutrient.fat, totalNutrient.sugar, totalNutrient.cholesterol, totalNutrient.natrium, totalNutrient.saturatedFattyAcid],
+    series: [
+      caculatedDailyNutrient.calbonate, 
+      caculatedDailyNutrient.protein, 
+      caculatedDailyNutrient.fat, 
+      caculatedDailyNutrient.sugar, 
+      caculatedDailyNutrient.cholesterol, 
+      caculatedDailyNutrient.natrium, 
+      caculatedDailyNutrient.saturatedFattyAcid
+    ],
     options : {
       labels: ["탄수화물", "단백질", "지방", "당류", "콜레스테롤", "나트륨", "지방산"],
       chart : {
@@ -56,16 +55,20 @@ const Chart = () => {
         }
       },
     }
-  }
+  } 
 
   return(
     <div>
-      <ReactApexChart
-        options={donutOptions.options}
-        series={donutOptions.series}
-        type='donut'
-        width='500'
-      />
+      {dailyTotalDiet.length > 0 ?
+        <ReactApexChart
+          options={donutOptions.options}
+          series={donutOptions.series}
+          type='donut'
+          width='500'
+        />
+        :
+        null
+    }
     </div>
   )
 }
