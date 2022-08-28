@@ -1,10 +1,19 @@
-import { useState } from 'react';
-import { Container, Title, StyledFilledWater,  StyledEmptyWater} from './CountWater.style.jsx'
+import { useState, useEffect } from 'react';
+import { Container, Title, StyledFilledWater,  StyledEmptyWater} from './CountWater.style.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAction, selectSelector } from '../../../features/Select/slice.js';
 
 const CountWater = () => {
-  const [ countWater , setCountWater ] = useState(0);
+  const dispatch = useDispatch();
+  const { waterCount } = useSelector(selectSelector.all)
+  const [ countWater , setCountWater ] = useState(waterCount);
   const onIncreaseHandler = () => setCountWater(prev => prev+1);
   const onDecreaseHandler = () => setCountWater(prev => prev-1);
+
+  useEffect(()=>{
+    dispatch(selectAction.setCountWater(countWater));
+  },[countWater, dispatch])
+
   return(
     <Container>
       <Title>오늘 몇 잔의 물을 마셨나요?</Title>
@@ -14,6 +23,3 @@ const CountWater = () => {
   )
 }
 export default CountWater;
-
-//빈 컵을 클릭하면 순서대로 하니씩 채워진다.(마지막 컵을 클릭해도 첫번째 아이콘 바꾸기)
-//채워져 있는 컵을 클릭하면 빈컵으로 count--

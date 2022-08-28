@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { selectAction } from "../../../features/Select/slice";
 import { nutrientAction } from "../../../features/Search/slice";
 import { InputNumber } from "antd";
-
+import dayjs from 'dayjs'
 const MealPortion = ({ food, onClose }) => {
   const dispatch = useDispatch();
   const portionRef = useRef();
@@ -13,9 +13,11 @@ const MealPortion = ({ food, onClose }) => {
     const { addMeal } = selectAction;
     const { reset } = nutrientAction;
     const amount = portionRef.current.value;
+    const date = dayjs().format('YYYY-MM-DD');
     const mealDesk = {
       ...food, 
-      portion: amount/food.foodData['SERVING_WT']
+      portion: amount/food.foodData['SERVING_WT'],
+      date
     }
     dispatch(addMeal(mealDesk));
     dispatch(reset());

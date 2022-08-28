@@ -1,15 +1,21 @@
 import { createSlice, createSelector, createAction } from "@reduxjs/toolkit";
 
 const initialState = {
+  date : '',
   breakfast : [],
   lunch : [],
   dinner : [],
   error: null,
+  waterCount: 0,
 }
 
 const reducers = {
   addMeal: (state, action) => {
     state[action.payload.meal].push(action.payload);
+    state.date = action.payload.date;
+  },
+  setCountWater: (state, action) => {
+    state.waterCount = action.payload;
   },
   removeMeal: (state, action) => {
     state[action.payload.meal] = state[action.payload.meal].filter((food)=>food.foodData.DESC_KOR !== action.payload.name);
@@ -36,14 +42,15 @@ const selectAllState = createSelector(
   state => state.lunch,
   state => state.dinner,
   state => state.date,
-  (breakfast, lunch, dinner, date) => {
-    return {breakfast, lunch, dinner, date}
+  state => state.waterCount,
+  (breakfast, lunch, dinner, date, waterCount) => {
+    return {breakfast, lunch, dinner, date, waterCount}
   }
-)
+);
 
 export const selectSelector = {
-  all: state => selectAllState(state[Select])
-}
+  all: state => selectAllState(state[Select]),
+};
 
 export const Select = slice.name;
 export const selectReducer = slice.reducer;

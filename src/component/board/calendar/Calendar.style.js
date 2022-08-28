@@ -9,6 +9,17 @@ export const Title = styled.h2`
   color: #777;
 `
 
+export const Point = styled.div`
+  position: absolute;
+  z-index: 10;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: #93bf85;
+  margin-left: 12px;
+  margin-top: 6px;
+`
+
 export const StyledCalendar = styled(Calendar)`
  width: 100%;
  background-color: #fff;

@@ -8,6 +8,7 @@ import Main from "./page/Main/Main.component";
 import Intro from "./page/Intro/Intro.component";
 import { checkUserSession, authSelector } from './features/Auth/slice';
 import { selectSelector, selectAction } from "./features/Select/slice";
+import dayjs from 'dayjs';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkUserSession())
-    const today = new Date().toLocaleDateString();
+    const today = dayjs().format('YYYY-MM-DD');
     if(date !== today) dispatch(selectAction.clear());
   },[]);
 
