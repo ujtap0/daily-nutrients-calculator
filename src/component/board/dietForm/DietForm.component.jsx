@@ -27,7 +27,7 @@ const  DietForm = ({onClose}) => {
       {currentPage}
       <div>
         {order > 0 ? <button onClick={prevHandler}>prev</button> : null}
-        {Object.keys(meal).length > 0 ? <button onClick={nextHandler}>next</button> : null}
+        {Object.keys(meal).length > 0 && order !== 1? <button onClick={nextHandler}>next</button> : null}
       </div>
     </Modal>
 )}

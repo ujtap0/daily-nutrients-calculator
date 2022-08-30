@@ -1,5 +1,6 @@
 import Chart from "../../component/details/Chart.component";
 import MealForDay from "../../component/details/Meal/MealForDay.component";
+import { Container } from "./MealDetails.style";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -17,10 +18,10 @@ const MealDetails = () => {
   return(
     <div>
       {dailyTotalDiet.length > 0 ? 
-      <div>
+      <Container>
         <Chart />
         <MealForDay />
-      </div>
+      </Container>
       : null}
     </div>
 

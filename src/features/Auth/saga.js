@@ -1,7 +1,8 @@
 import {takeLatest, put, call, all} from 'redux-saga/effects';
 import { googleSignInStart, authActions, checkUserSession, addAdditonalUserInfo, signOutStart } from './slice';
-import { getCurrentUser, getUserDescFromAuth, signInWithGooglePopup, addUserInfo, signOutUser, getDietPerMonth } from '../../utils/firebase/firebase';
+import { getCurrentUser, getUserDescFromAuth, signInWithGooglePopup, addUserInfo, signOutUser } from '../../utils/firebase/firebase';
 import { getAdditionalUserInfo } from 'firebase/auth';
+import { selectAction } from '../Select/slice';
 
 export function* getSnapshotFromUserAuth (userAuth) {
   const { loadSuccess, loadFail } = authActions;
@@ -50,10 +51,12 @@ export function* isUserAuthenticated(){
 }
 
 export function* signOut() {
-  const {clear} = authActions;
+  const {clear:authClear} = authActions;
+  const {clear:selectClear} = selectAction;
   try{
     yield call(signOutUser);
-    yield put(clear());
+    yield put(authClear());
+    yield put(selectClear());
   }catch(error){
     console.log(error);
   }

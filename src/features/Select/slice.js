@@ -25,6 +25,7 @@ const reducers = {
   },
   clear: (state) => {
     state.date = '';
+    state.waterCount= 0;
     state.breakfast = [];
     state.lunch = [];
     state.dinner = [];

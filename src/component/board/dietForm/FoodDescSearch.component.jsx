@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nutrientAction, nutrientSelector } from '../../../features/Search/slice';
-
+import { StyledInput,InputContainer, StyledSelect, SearchFoodListItem, SerachResultContainer, PagenationContainer, PageNationNum } from "./FoodDescSearch.style";
+import Button from "../../ui/Button.component";
+import { BUTTON_TYPE_CLASSES } from "../../ui/Button.component";
 import { Select } from "antd";
-const  {Option } = Select
+const  { Option } = Select
 
 const FoodDescSearch = ({foodHandler, nextHandler}) => {
   const {isLoading, data, error, totalPage, searchTerm} = useSelector(nutrientSelector.all);
@@ -46,31 +48,31 @@ const FoodDescSearch = ({foodHandler, nextHandler}) => {
     resultList = <p>검색 결과가 없습니다</p>
   } else {
     resultList = data.map((foodData, idx) => 
-      <li 
+      <SearchFoodListItem 
         onClick={selectFoodHandler.bind(undefined, foodData)} 
         key={idx}
       >
         <span>{foodData.DESC_KOR}</span>
-      </li>)
+      </SearchFoodListItem>)
   }
   return(
     <div>
-      <div>
-        <Select defaultValue="breakfast" onChange={seletMealHandler}>
+      <InputContainer>
+        <StyledSelect defaultValue="breakfast" onChange={seletMealHandler}>
           <Option value="breakfast">아침</Option>
           <Option value="lunch">점심</Option>
           <Option value="dinner">저녁</Option>
-        </Select>
-        <input ref={inputRef} />
-        <button onClick={searchHandler}>submit</button>
-      </div>
-      <ul>
+        </StyledSelect>
+        <StyledInput ref={inputRef} />
+        <Button buttonType={BUTTON_TYPE_CLASSES.filled} onClick={searchHandler}>submit</Button>
+      </InputContainer>
+      <SerachResultContainer>
         {!isLoading&&resultList}
-      </ul>
-      <ul>
+      </SerachResultContainer>
+      <PagenationContainer>
           {!isLoading&&Array.from({length: totalPage}, (v, i) => i + 1)
-            .map((pageNum)=><button onClick={(e) => {pageNavigateHandler(pageNum, e)}}>{pageNum}</button>)}
-      </ul>
+            .map((pageNum)=><PageNationNum onClick={(e) => {pageNavigateHandler(pageNum, e)}}>{pageNum}</PageNationNum>)}
+      </PagenationContainer>
     </div>
   )
 }

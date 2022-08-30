@@ -16,8 +16,8 @@ export const Point = styled.div`
   width: 10px;
   height: 10px;
   background-color: #93bf85;
-  margin-left: 12px;
-  margin-top: 6px;
+  margin-left: 1.2rem;
+  margin-top: 1.2rem;
 `
 
 export const StyledCalendar = styled(Calendar)`
@@ -61,7 +61,7 @@ export const StyledCalendar = styled(Calendar)`
         top: 50%;
         transform: translate(-50%, -50%);
         box-sizing: border-box;
-        padding: 20px;
+        padding: 1.7rem;
         border-radius: 50%;
         background: rgba(242, 132, 130, 0.4);
         color: #fff;

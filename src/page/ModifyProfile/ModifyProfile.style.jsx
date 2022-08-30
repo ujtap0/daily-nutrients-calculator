@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Radio } from "antd";
+const { Group } = Radio;
 
 export const FormContainer = styled.div`
   max-width: 56rem;
@@ -24,7 +26,7 @@ export const StyledInput = styled.input`
   margin-right: 1rem;
   border: 0;
   font-size: 1.6rem;
-  border-bottom: 2px solid  #84a59d;
+  border-bottom: 2px solid #84a59d;
   &:focus{
     outline: 0;
   }
@@ -43,4 +45,13 @@ export const StyledLabel = styled.label`
 export const StyledBtnContainer = styled.div`
   text-align: right;
   margin-top: 8rem;
+`
+export const StyledRadioContainer = styled(Group)`
+  padding-top: 1rem
+`
+export const StyledRadio = styled(Radio)`
+  margin-bottom: 1.3rem;
+  &:last-child{
+    margin-bottom: 0;
+  }
 `
