@@ -1,8 +1,8 @@
 # 잘먹기록
 
 <br>
-![1](https://user-images.githubusercontent.com/85479957/190549247-7c602b64-1001-4b89-b99b-8d991a8903d8.gif)
-![2](https://user-images.githubusercontent.com/85479957/190549258-4c7bb3f5-8125-4588-b197-4a1e10651dea.gif)
+<img src="https://user-images.githubusercontent.com/85479957/190549247-7c602b64-1001-4b89-b99b-8d991a8903d8.gif">
+<img src="https://user-images.githubusercontent.com/85479957/190549258-4c7bb3f5-8125-4588-b197-4a1e10651dea.gif">
 </br>
 
 
