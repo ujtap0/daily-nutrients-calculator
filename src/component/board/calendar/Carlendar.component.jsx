@@ -19,7 +19,7 @@ const Calendar = () => {
     dispatch(loadByMonth(monthYear))
   },[dispatch, month, year]);
 
-  const {isLoading, dietByMonth, error} = useSelector(dietSelector.month);
+  const {dietByMonth} = useSelector(dietSelector.month);
 
   console.log(dietByMonth);
 

@@ -32,7 +32,6 @@ const slice = createSlice({
   name, initialState, reducers
 });
 
-//useSelector가 실행될 때마다 정의된 함수는 매번 새로운 배열을 반환하게 되면서 이전에 참조하고 있던 객체 주소가 현재 주소와의 차이를 발생시켜서 계산 비용이 발생
 
 const authAllState = createSelector(
   state => state.isNewUser,

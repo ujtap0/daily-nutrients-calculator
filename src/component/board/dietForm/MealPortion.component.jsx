@@ -2,7 +2,9 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { selectAction } from "../../../features/Select/slice";
 import { nutrientAction } from "../../../features/Search/slice";
-import { InputNumber } from "antd";
+import Button from "../../ui/Button.component";
+import { BUTTON_TYPE_CLASSES } from "../../ui/Button.component";
+import { StyledTitle, StyledInput, SubmitContainer, InputContainer } from "./MealPortion.style";
 import dayjs from 'dayjs'
 const MealPortion = ({ food, onClose }) => {
   const dispatch = useDispatch();
@@ -26,13 +28,18 @@ const MealPortion = ({ food, onClose }) => {
 
   return(
     <form onSubmit={submitHandler}>
-      <h3>얼마나 드셨나요?</h3>
-      <InputNumber 
-        min={+food.foodData['SERVING_WT']} 
-        defaultValue={+food.foodData['SERVING_WT']} 
-        step={+food.foodData['SERVING_WT']} 
-        ref={portionRef}/>
-      <button>제출하기</button>
+      <StyledTitle>얼마나 드셨나요?</StyledTitle>
+      <SubmitContainer>
+        <InputContainer>
+          <StyledInput 
+            min={+food.foodData['SERVING_WT']} 
+            defaultValue={+food.foodData['SERVING_WT']} 
+            step={+food.foodData['SERVING_WT']} 
+            ref={portionRef}/>
+            <span>g</span>
+        </InputContainer>
+        <Button buttonType={BUTTON_TYPE_CLASSES.inverted}>제출하기</Button>
+      </SubmitContainer>
     </form>
   )
 }

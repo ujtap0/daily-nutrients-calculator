@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import FoodDescSearch from './FoodDescSearch.component'
 import MealPortion from './MealPortion.component';
+import { ButtonContainer } from './DietForm.style';
 
 import Modal from '../../ui/Modal.component';
 
@@ -25,10 +26,10 @@ const  DietForm = ({onClose}) => {
   return (
     <Modal onClose={onClose}>
       {currentPage}
-      <div>
-        {order > 0 ? <button onClick={prevHandler}>prev</button> : null}
-        {Object.keys(meal).length > 0 && order !== 1? <button onClick={nextHandler}>next</button> : null}
-      </div>
+      <ButtonContainer>
+        {order > 0 ? <button onClick={prevHandler} className='left'>◀</button> : null}
+        {Object.keys(meal).length > 0 && order !== 1? <button onClick={nextHandler} className='right'>▶</button> : null}
+      </ButtonContainer>
     </Modal>
 )}
 

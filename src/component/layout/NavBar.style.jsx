@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "../../component/ui/Button.component";
 
 export const NavBarWrapper = styled.div`
-  width 100%;
+  width: 100%;
   padding: 2.3rem 0;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   background-color: #fff;

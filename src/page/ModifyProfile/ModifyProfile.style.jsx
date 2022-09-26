@@ -32,7 +32,7 @@ export const StyledInput = styled.input`
   }
 `
 export const StyledSelect = styled.select`
-  width 90%;
+  width: 90%;
   font-size: 1.6rem;
   padding: 0.5rem 1rem;
   border: 1px solid  #d3d3d3;

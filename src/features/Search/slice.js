@@ -38,9 +38,6 @@ const slice = createSlice({
   name, initialState, reducers
 })
 
-//createSelector: useSelector가 실행될 때마다 그안에 정의된 함수는 매번 새로운 배열을 반환하게 되면서 이전에 참조하고 있던 객체 주소가 현재 주소와의 차이를 발생
-//rerendering이 일어남
-
 const selectAllState = createSelector(
   state => state.isLoading,
   state => state.searchTerm,
