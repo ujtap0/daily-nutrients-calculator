@@ -46,3 +46,11 @@ export const PageNationNum = styled.li`
   margin-right: 1rem;
   margin-top: 1rem;
 `
+
+export const NextPageGroup = styled(PageNationNum)`
+  visibility: ${({isNext}) => (isNext ? 'visible': 'hidden')};
+`
+
+export const PrevPageGroup = styled(PageNationNum)`
+  visibility: ${({isPrev}) => (isPrev ? 'visible' : 'hidden')};
+`

@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { nutrientAction, nutrientSelector } from '../../../features/Search/slice';
-import { StyledInput,InputContainer, StyledSelect, SearchFoodListItem, SerachResultContainer, PagenationContainer, PageNationNum } from "./FoodDescSearch.style";
+import { StyledInput,InputContainer, StyledSelect, SearchFoodListItem, SerachResultContainer, PagenationContainer, PageNationNum, NextPageGroup, PrevPageGroup } from "./FoodDescSearch.style";
 import Button from "../../ui/Button.component";
 import { BUTTON_TYPE_CLASSES } from "../../ui/Button.component";
 import { Select } from "antd";
@@ -9,10 +9,12 @@ const  { Option } = Select
 
 const FoodDescSearch = ({foodHandler, nextHandler}) => {
   const {isLoading, data, error, totalPage, searchTerm} = useSelector(nutrientSelector.all);
+  const [pageGroup, setPageGroup] = useState(10);
   const [meal, setMeal] = useState('breakfast')
   const dispatch = useDispatch();
   const inputRef = useRef();
 
+  
   const searchHandler = () => {
     const { load } = nutrientAction;
     const enteredFoodName = inputRef.current.value;
@@ -33,6 +35,15 @@ const FoodDescSearch = ({foodHandler, nextHandler}) => {
     dispatch(load(request));
   }
 
+  const nextPageGroupHandler = () => {
+    setPageGroup(prev => prev + 10);
+    pageNavigateHandler(pageGroup);
+  }
+  const prevPageGroupHandler = () => {
+    setPageGroup(prev => prev - 10)
+    pageNavigateHandler(pageGroup);
+  };
+  
   const seletMealHandler = (value) => {
     setMeal(value)
   }
@@ -55,6 +66,9 @@ const FoodDescSearch = ({foodHandler, nextHandler}) => {
         <span>{foodData.DESC_KOR}</span>
       </SearchFoodListItem>)
   }
+
+  console.log(pageGroup)
+  console.log(totalPage)
   return(
     <div>
       <InputContainer>
@@ -70,8 +84,11 @@ const FoodDescSearch = ({foodHandler, nextHandler}) => {
         {!isLoading&&resultList}
       </SerachResultContainer>
       <PagenationContainer>
+          <PrevPageGroup onClick={prevPageGroupHandler} isPrev={pageGroup>10}>&lt;</PrevPageGroup>
           {!isLoading&&Array.from({length: totalPage}, (v, i) => i + 1)
+            .slice(pageGroup-10, pageGroup)
             .map((pageNum)=><PageNationNum onClick={(e) => {pageNavigateHandler(pageNum, e)}}>{pageNum}</PageNationNum>)}
+          <NextPageGroup onClick={nextPageGroupHandler} isNext={Math.ceil(totalPage) > pageGroup}>&gt;</NextPageGroup>
       </PagenationContainer>
     </div>
   )

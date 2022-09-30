@@ -6,6 +6,7 @@ import { calculator } from '../../utils/calNutrient';
 const Chart = () => {
   const dailyTotalDiet = useSelector(dietSelector.dailyNutrient);
   const caculatedDailyNutrient = calculator(dailyTotalDiet);
+  console.log(typeof(+caculatedDailyNutrient.fat.toFixed(2)))
   const donutOptions = {
     series: [
       caculatedDailyNutrient.calbonate, 
